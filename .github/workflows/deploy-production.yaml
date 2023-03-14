@@ -25,13 +25,15 @@ jobs:
           file: cdk.out.zip
       - name: Unzip Artifact
         run: unzip cdk.out.zip
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: eu-central-1
+      # - name: Configure AWS credentials
+      #  uses: aws-actions/configure-aws-credentials@v1-node16
+      #  with:
+      #    role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+      #    aws-region: eu-central-1
+      #- name: Deploy Artifact
+      #  run: npx cdk deploy --app "./cdk.out/assembly-Prod" --all --concurrency 10 --method=direct --require-approval never
       - name: Deploy Artifact
-        run: npx cdk deploy --app "./cdk.out/assembly-Prod" --all --concurrency 10 --method=direct --require-approval never
+        run: echo "Deploy cdk as release-production-manual" 
   release-production-auto:
     name: Release to Production
     if: startsWith(github.ref_name, 'r-')
@@ -48,10 +50,12 @@ jobs:
           file: cdk.out.zip
       - name: Unzip Artifact
         run: unzip cdk.out.zip
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: eu-central-1
+      # - name: Configure AWS credentials
+      #  uses: aws-actions/configure-aws-credentials@v1-node16
+      #  with:
+      #    role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+      #    aws-region: eu-central-1
+      #- name: Deploy Artifact
+      #  run: npx cdk deploy --app "./cdk.out/assembly-Prod" --all --concurrency 10 --method=direct --require-approval never
       - name: Deploy Artifact
-        run: npx cdk deploy --app "./cdk.out/assembly-Prod" --all --concurrency 10 --method=direct --require-approval never
+        run: echo "Deploy cdk as release-production-auto" 
