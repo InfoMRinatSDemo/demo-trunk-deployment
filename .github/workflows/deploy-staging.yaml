@@ -45,13 +45,15 @@ jobs:
         with:
           name: cdk-out
           path: cdk.out
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: eu-central-1
+      # - name: Configure AWS credentials
+      #  uses: aws-actions/configure-aws-credentials@v1-node16
+      #  with:
+      #    role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+      #    aws-region: eu-central-1
+      #- name: Deploy Artifact
+      #  run: npx cdk deploy --app "./cdk.out/assembly-Staging" --all --concurrency 10 --method=direct --require-approval never
       - name: Deploy Artifact
-        run: npx cdk deploy --app "./cdk.out/assembly-Staging" --all --concurrency 10 --method=direct --require-approval never
+        run: echo "Deploy cdk to AWS"      
   create-release:
     name: Create Release
     runs-on: ubuntu-latest
