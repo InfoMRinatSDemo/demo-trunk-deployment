@@ -18,6 +18,9 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
       - name: Get Artifact from Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -43,6 +46,9 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
       - name: Get Artifact from Release
         uses: dsaltares/fetch-gh-release-asset@master
         with:
